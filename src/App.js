@@ -1,70 +1,42 @@
 import './App.css';
+import Product from "./Components/Product/Product";
+import Header from "./Components/Header";
+import CartDrawer from "./Components/CartDrawer";
+import {useEffect, useState} from "react";
 
 function App() {
+
+    // https://62867f02f0e8f0bb7c16f7e2.mockapi.io/:endpoint
+
+    // const products = [
+    //     {"name": "Мужские Кроссовки Nike Blazer Mid Suede", "price": 111, "img": "./img/products/1.png"},
+    //     {"name": "Мужские Кроссовки Nike Air Max 270", "price": 115, "img": "./img/products/2.png"},
+    //     {"name": "Мужские Кроссовки Nike Blazer Mid Suede", "price": 120, "img": "./img/products/3.png"},
+    //     {"name": "Кроссовки Puma X Aka Boku Future Rider", "price": 150, "img": "./img/products/4.png"},
+    //     {"name": "Мужские Кроссовки Under Armour Curry 8", "price": 112, "img": "./img/products/5.png"},
+    //     {"name": "Мужские Кроссовки Nike Kyrie 7", "price": 99, "img": "./img/products/6.png"},
+    //     {"name": "Мужские Кроссовки Jordan Air Jordan 11", "price": 125, "img": "./img/products/7.png"},
+    //     {"name": "Мужские Кроссовки Nike LeBron XVIII", "price": 152, "img": "./img/products/8.png"},
+    //     {"name": "Мужские Кроссовки Nike Lebron XVIII Low", "price": 85, "img": "./img/products/9.png"},
+    //     {"name": "Мужские Кроссовки Nike Blazer Mid Suede", "price": 100, "img": "./img/products/10.png"},
+    //     {"name": "Кроссовки Puma X Aka Boku Future Rider", "price": 105, "img": "./img/products/11.png"},
+    //     {"name": "Мужские Кроссовки Nike Kyrie Flytrap IV", "price": 155, "img": "./img/products/12.png"},
+    // ]
+
+    const [items, setItems] = useState([])
+    const [showCart, setShowCart] = useState(false)
+
+
+    useEffect(() => {
+        fetch('https://62867f02f0e8f0bb7c16f7e2.mockapi.io/items')
+            .then(res => res.json())
+            .then(json => setItems(json))
+    }, [])
+
     return (
         <div className="App">
-            <div style={{display: 'none'}} className="overlay">
-                <div className="drawer">
-                    <div className="cart-top">
-                        <h2>Your Cart 🛒</h2>
-                        <img className={'btn-del'} width={32} height={32} src="./img/btn-del.svg" alt="Delete"/>
-                    </div>
-                    <div className="cart-items">
-                        <div className="cart-item">
-                            <img width={70} height={70} src="./img/products/1.png" alt="sneakers"/>
-                            <div className="cart-details">
-                                <p>Мужские Кроссовки Nike Air Max 270</p>
-                                <b>120$</b>
-                            </div>
-                            <img className={'btn-del'} width={32} height={32} src="./img/btn-del.svg" alt="Delete"/>
-                        </div>
-                        <div className="cart-item">
-                            <img width={70} height={70} src="./img/products/1.png" alt="sneakers"/>
-                            <div className="cart-details">
-                                <p>Мужские Кроссовки Nike Air Max 270</p>
-                                <b>120$</b>
-                            </div>
-                            <img className={'btn-del'} width={32} height={32} src="./img/btn-del.svg" alt="Delete"/>
-                        </div>
-                    </div>
-                    <div className="cart-bottom">
-                        <ul className="order-details">
-                            <li>
-                                <span>Total: </span>
-                                <div className="filler"/>
-                                <b>120$</b>
-                            </li>
-                            <li>
-                                <span>Tax 5%: </span>
-                                <div className="filler"/>
-                                <b>7$</b>
-                            </li>
-                        </ul>
-                        <button className="btn-green">
-                            Complete Order
-                            <img src="./img/arrow-r.svg" alt="Arrow"/>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <header>
-                <div className="leftHeader">
-                    <img width={40} height={40} src={'./img/logo.png'} alt="logo"/>
-                    <div className="headerInfo">
-                        <h2>React Sneaker Shop</h2>
-                        <p>Best sneaker shop</p>
-                    </div>
-                </div>
-                <ul className={'rightHeader'}>
-                    <li>
-                        <img src="./img/cart.svg" alt={'cart-logo'}/>
-                        <p>120 usd</p>
-                    </li>
-                    <li>
-                        <img src="./img/user.svg" alt={'user-logo'}/>
-                    </li>
-                </ul>
-            </header>
+            {showCart && <CartDrawer onClickClose={() => setShowCart(false)}/>}
+            <Header onClickCart={() => setShowCart(true)}/>
             <div className="content">
                 <div className="contentTop">
                     <h1>All Sneakers</h1>
@@ -74,70 +46,9 @@ function App() {
                     </div>
                 </div>
                 <div className="products">
-                    <div className="item">
-                        <div className={'favourite'}>
-                            <img src="./img/heart-unliked.svg" alt="Unliked"/>
-                        </div>
-                        <img width={133} height={112} src="./img/products/1.png" alt="nike sneakers"/>
-                        <h5>Nike Blazer Mid Suede</h5>
-                        <div className={'item-bottom'}>
-                            <div className={'item-price'}>
-                                <span>Price:</span>
-                                <b>120$</b>
-                            </div>
-                            <button className={'add-btn'}>
-                                <img width={11} height={11} src="./img/plus.svg" alt="Plus"/>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="item">
-                        <div className={'favourite'}>
-                            <img src="./img/heart-unliked.svg" alt="Unliked"/>
-                        </div>
-                        <img width={133} height={112} src="./img/products/1.png" alt="nike sneakers"/>
-                        <h5>Nike Blazer Mid Suede</h5>
-                        <div className={'item-bottom'}>
-                            <div className={'item-price'}>
-                                <span>Price:</span>
-                                <b>120$</b>
-                            </div>
-                            <button className={'add-btn'}>
-                                <img width={11} height={11} src="./img/plus.svg" alt="Plus"/>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="item">
-                        <div className={'favourite'}>
-                            <img src="./img/heart-unliked.svg" alt="Unliked"/>
-                        </div>
-                        <img width={133} height={112} src="./img/products/1.png" alt="nike sneakers"/>
-                        <h5>Nike Blazer Mid Suede</h5>
-                        <div className={'item-bottom'}>
-                            <div className={'item-price'}>
-                                <span>Price:</span>
-                                <b>120$</b>
-                            </div>
-                            <button className={'add-btn'}>
-                                <img width={11} height={11} src="./img/plus.svg" alt="Plus"/>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="item">
-                        <div className={'favourite'}>
-                            <img src="./img/heart-unliked.svg" alt="Unliked"/>
-                        </div>
-                        <img width={133} height={112} src="./img/products/1.png" alt="nike sneakers"/>
-                        <h5>Nike Blazer Mid Suede</h5>
-                        <div className={'item-bottom'}>
-                            <div className={'item-price'}>
-                                <span>Price:</span>
-                                <b>120$</b>
-                            </div>
-                            <button className={'add-btn'}>
-                                <img width={11} height={11} src="./img/plus.svg" alt="Plus"/>
-                            </button>
-                        </div>
-                    </div>
+                    {items.map(el => {
+                        return <Product name={el.name} price={el.price} img={el.img}/>
+                    })}
                 </div>
 
             </div>
