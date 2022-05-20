@@ -1,8 +1,9 @@
 import './App.css';
 import Product from "./Components/Product/Product";
 import Header from "./Components/Header";
-import CartDrawer from "./Components/CartDrawer";
+import CartDrawer from "./Components/CartDrawer/CartDrawer";
 import {useEffect, useState} from "react";
+import axios from "axios";
 
 function App() {
 
@@ -25,30 +26,60 @@ function App() {
 
     const [items, setItems] = useState([])
     const [showCart, setShowCart] = useState(false)
+    const [cartItems, setCartItems] = useState([])
+    const [searchInput, setSearchInput] = useState('')
+    const [favourites, setFavourites] = useState([])
 
 
     useEffect(() => {
-        fetch('https://62867f02f0e8f0bb7c16f7e2.mockapi.io/items')
-            .then(res => res.json())
-            .then(json => setItems(json))
+        axios.get('https://62867f02f0e8f0bb7c16f7e2.mockapi.io/items')
+            .then(res => setItems(res.data))
+
+        axios.get('https://62867f02f0e8f0bb7c16f7e2.mockapi.io/cart')
+            .then(res => setCartItems(res.data))
     }, [])
+
+    const onAddToCart = (obj) => {
+        setCartItems(prev => [...prev, obj])
+        axios.post('https://62867f02f0e8f0bb7c16f7e2.mockapi.io/cart', obj)
+        console.log(obj)
+    }
+
+    const onAddToFavourite = (obj) => {
+        axios.post('https://62867f02f0e8f0bb7c16f7e2.mockapi.io/favourites', obj)
+        setFavourites(prev => [...prev, obj])
+        console.log(obj)
+    }
+
+    const onRemoveItem = (id) => {
+        axios.delete(`https://62867f02f0e8f0bb7c16f7e2.mockapi.io/cart/${id}`)
+        setCartItems(cartItems.filter(el => el.id !== id))
+        console.log(`remove item ${id}`)
+    }
+
+
 
     return (
         <div className="App">
-            {showCart && <CartDrawer onClickClose={() => setShowCart(false)}/>}
+            {showCart && <CartDrawer cartItems={cartItems} onRemoveItem={onRemoveItem} onClickClose={() => setShowCart(false)}/>}
             <Header onClickCart={() => setShowCart(true)}/>
             <div className="content">
                 <div className="contentTop">
-                    <h1>All Sneakers</h1>
+                    {searchInput ? <h1>Search for '{searchInput}'</h1> : <h1>All Sneakers</h1>}
                     <div className="search">
                         <img width={15} height={15} src="./img/search.svg" alt="Search"/>
-                        <input type="text" placeholder={'Search...'}/>
+                        <input onChange={(e) => setSearchInput(e.target.value)} type="text" placeholder={'Search...'}
+                               value={searchInput}/>
+                        {searchInput && <img width={20} height={20} src="./img/btn-del.svg" alt="Search"
+                                             onClick={() => setSearchInput('')}/>}
                     </div>
                 </div>
                 <div className="products">
-                    {items.map(el => {
-                        return <Product name={el.name} price={el.price} img={el.img}/>
-                    })}
+                    {items.filter(el => el.name.toLowerCase().includes(searchInput.toLowerCase()))
+                        .map((el, index) => {
+                            return <Product key={index} name={el.name} price={el.price} onAddToFavourite={(obj) => onAddToFavourite(obj)}
+                                            img={el.img} onAddToCart={(obj) => onAddToCart(obj)}/>
+                        })}
                 </div>
 
             </div>
