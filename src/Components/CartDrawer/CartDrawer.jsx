@@ -44,14 +44,14 @@ const CartDrawer = (props) => {
                 <div className={styles.cartTop}>
                     <h2>Your Cart 🛒</h2>
                     <img className={styles.btnDel} width={32} height={32}
-                         src="./img/btn-del.svg" alt="Delete" onClick={props.onCloseCart}/>
+                         src="img/btn-del.svg" alt="Delete" onClick={props.onCloseCart}/>
                 </div>
                 {props.cartItems.length > 0
                     ? <FilledCart onRemoveItem={props.onRemoveItem} cartItems={props.cartItems} total={total}
                                   onCompleteOrder={onCompleteOrder} isLoading={isLoading}/>
                     : <Info title={isOrderCompleted ? 'Order is processed!' : 'Your cart is empty'}
                             onCloseCart={props.onCloseCart}
-                            img={isOrderCompleted ? './img/completed-order.png' : './img/empty-cart.png'}
+                            img={isOrderCompleted ? 'img/completed-order.png' : 'img/empty-cart.png'}
                             text={isOrderCompleted ? `Your order #${orderId} will be delivered to courier soon` : 'Add something to the cart to complete an order.'}/>}
             </div>
         </div>

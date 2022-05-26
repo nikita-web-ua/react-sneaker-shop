@@ -40,7 +40,7 @@ const Product = (props) => {
                         {
                             props.onAddToFavourite && (
                             <div className={styles.favourite}>
-                                <img src={isFavourite ? './img/heart-liked.svg' : './img/heart-unliked.svg'} alt="Unliked"
+                                <img src={isFavourite ? 'img/heart-liked.svg' : 'img/heart-unliked.svg'} alt="Unliked"
                                  onClick={addFavourite}/>
                             </div>)
                         }
@@ -53,8 +53,8 @@ const Product = (props) => {
                             </div>
                             {props.onAddToCart && <img className={styles.addBtn} onClick={addToCartHandler} alt="Add"
                                                        src={isAddedToCart(props.id)
-                                                           ? './img/btn-checked.svg'
-                                                           : './img/btn-unchecked.svg'}/>}
+                                                           ? 'img/btn-checked.svg'
+                                                           : 'img/btn-unchecked.svg'}/>}
                         </div>
                     </>
             }

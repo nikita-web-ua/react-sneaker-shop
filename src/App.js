@@ -108,12 +108,12 @@ function App() {
                 <CartDrawer cartItems={cartItems} onRemoveItem={onRemoveItem} onCloseCart={onCloseCart} opened={showCart}/>
                 <Header onClickCart={() => setShowCart(true)}/>
                 <Routes>
-                    <Route path='/' exact
+                    <Route path={process.env.PUBLIC_URL + '/'} exact
                            element={<Home items={items} cartItems={cartItems} onAddToFavourite={onAddToFavourite}
                                           onAddToCart={onAddToCart} isLoading={isLoading}/>}/>
-                    <Route path='/favourites'
+                    <Route path={process.env.PUBLIC_URL + '/favourites'}
                            element={<Favourites onAddToCart={onAddToCart} onAddToFavourite={onAddToFavourite}/>}/>
-                    <Route path={'/orders'} element={<Orders/>} />
+                    <Route path={process.env.PUBLIC_URL + '/orders'} element={<Orders/>} />
                 </Routes>
             </div>
         </AppContext.Provider>

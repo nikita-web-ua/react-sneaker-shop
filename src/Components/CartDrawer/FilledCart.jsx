@@ -17,12 +17,12 @@ const FilledCart = (props) => {
                     <li>
                         <span>Tax 5%: </span>
                         <div className={styles.filler}/>
-                        <b>{props.total * 0.05}$</b>
+                        <b>{(props.total * 0.05).toFixed(2)}$</b>
                     </li>
                 </ul>
                 <button disabled={props.isLoading} className={`btn-green ${styles.btnGreen}`} onClick={props.onCompleteOrder}>
                     Complete Order
-                    <img src="./img/arrow-r.svg" alt="Arrow"/>
+                    <img src="img/arrow-r.svg" alt="Arrow"/>
                 </button>
             </div>
         </div>

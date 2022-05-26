@@ -8,7 +8,7 @@ const CartItem = (props) => {
                 <p>{props.item.name}</p>
                 <b>{props.item.price}$</b>
             </div>
-            <img onClick={() => props.onRemoveItem(props.item.id)} className={styles.brnDel} width={32} height={32} src="./img/btn-del.svg" alt="Delete"/>
+            <img onClick={() => props.onRemoveItem(props.item.id)} className={styles.brnDel} width={32} height={32} src="img/btn-del.svg" alt="Delete"/>
         </div>
     )
 }

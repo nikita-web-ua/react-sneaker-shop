@@ -23,10 +23,10 @@ const Favourites = (props) => {
                                                                 onAddToFavourite={props.onAddToFavourite}/>)}
                     </div>
                     : <div className={"info-block"}>
-                        <Info img={'../img/miserable-emoji.png'}
+                        <Info img={'img/miserable-emoji.png'}
                               title={'Wishlist is empty ;('}
                               text={'Go back to the store and choose a pair of sneakers'}
-                              onCloseCart={() => navigate('/')}/>
+                              onCloseCart={() => navigate(process.env.PUBLIC_URL + '/')}/>
                     </div>
             }
         </div>

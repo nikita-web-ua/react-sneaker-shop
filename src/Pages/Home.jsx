@@ -24,10 +24,10 @@ const Home = (props) => {
             <div className="contentTop">
                 {searchInput ? <h1>Search for '{searchInput}'</h1> : <h1>All Sneakers</h1>}
                 <div className="search">
-                    <img width={15} height={15} src="./img/search.svg" alt="Search"/>
+                    <img width={15} height={15} src="img/search.svg" alt="Search"/>
                     <input onChange={(e) => setSearchInput(e.target.value)} type="text" placeholder={'Search...'}
                            value={searchInput}/>
-                    {searchInput && <img width={20} height={20} src="./img/btn-del.svg" alt="Search"
+                    {searchInput && <img width={20} height={20} src="img/btn-del.svg" alt="Search"
                                          onClick={() => setSearchInput('')}/>}
                 </div>
             </div>

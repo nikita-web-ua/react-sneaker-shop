@@ -51,10 +51,10 @@ const Orders = (props) => {
                             })}
                 </div>
                 : <div className={"info-block"}>
-                    <Info img={'../img/sad-emoji.png'}
+                    <Info img={'img/sad-emoji.png'}
                           title={'You dont have any orders yet ;('}
                           text={'Go back to the store and order a pair of sneakers'}
-                          onCloseCart={() => navigate('/')}/>
+                          onCloseCart={() => navigate(process.env.PUBLIC_URL + '/')}/>
                   </div>
             }
 
