@@ -93,6 +93,52 @@ header {
   }
 }
 
+.slider{
+  margin-bottom: 40px;
+  flex-direction: column;
+  display: flex;
+
+  img{
+    display: inline-block!important;
+  }
+
+  .slider-item{
+    display: flex !important;
+    justify-content: center;
+  }
+  .first-slider{
+    background-color: #F4EFE9;
+    border-radius: 20px;
+    max-width: 960px;
+    display: flex;
+    align-items: center;
+  }
+  .slider-info{
+    width: 250px;
+    display: inline-block;
+    margin-left: 60px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 46px;
+    color: #8BB43C;
+
+    h4{
+      margin: 0;
+    }
+
+    span{
+      color: black;
+    }
+
+    button{
+      background: #A5D364;
+      border-radius: 110px;
+      width: 177px;
+    }
+  }
+}
+
 .content {
 
   padding: 40px;

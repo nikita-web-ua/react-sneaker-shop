@@ -1,9 +1,18 @@
 import Product from "../Components/Product/Product";
 import {useState} from "react";
+import Slider from "react-slick";
 
 const Home = (props) => {
 
     const [searchInput, setSearchInput] = useState('')
+
+    let settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    }
 
     const renderItems = () => {
 
@@ -18,9 +27,32 @@ const Home = (props) => {
                                 onAddToFavourite={(obj) => props.onAddToFavourite(obj)}/>
             })
     )
+
     }
     return (
         <div className="content">
+            <div className={'slider'}>
+                <Slider {...settings}>
+                    <div className={'slider-item'} >
+                        <div className="first-slider">
+                            <div className="slider-info">
+                                <h4>Stan Smith, <span>Forever!</span></h4>
+                                <button className={'btn-green'}>Buy now!</button>
+                            </div>
+                            <img src="/img/slider.png" alt="Slider"/>
+                        </div>
+                    </div>
+                    <div className={'slider-item'} >
+                        <div className="first-slider">
+                            <div className="slider-info">
+                                <h4>Stan Smith, <span>Forever!</span></h4>
+                                <button className={'btn-green'}>Buy now!</button>
+                            </div>
+                            <img src="/img/slider.png" alt="Slider"/>
+                        </div>
+                    </div>
+                </Slider>
+            </div>
             <div className="contentTop">
                 {searchInput ? <h1>Search for '{searchInput}'</h1> : <h1>All Sneakers</h1>}
                 <div className="search">
